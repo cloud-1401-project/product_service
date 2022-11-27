@@ -3,10 +3,13 @@ import databases
 import sqlalchemy
 import grpc
 import auth_pb2_grpc
+import auth_pb2
 
 ''' GRPC CONFIGURATION '''
-stub = None
 GRPC_URL = "localhost:50051"
+Resource = auth_pb2.Resource
+channel = grpc.insecure_channel(GRPC_URL)
+stub = auth_pb2_grpc.AuthServiceStub(channel)
 
 ''' FastAPI CONFIGURATION '''
 app = FastAPI(title="Product Service",
@@ -28,10 +31,7 @@ engine = sqlalchemy.create_engine(
 
 @app.on_event("startup")
 async def startup():
-    global stub
     await database.connect()
-    channel = grpc.insecure_channel(GRPC_URL)
-    stub = auth_pb2_grpc.AuthServiceStub(channel)
 
 
 @app.on_event("shutdown")
