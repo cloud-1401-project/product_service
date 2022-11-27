@@ -1,14 +1,13 @@
 from config import engine
 from config import metadata
 from config import app
-from typing import Union
 import uvicorn
-from fastapi import Request, Header
+from fastapi import Request
 from fastapi.responses import JSONResponse
-#from core.route import products_route
+from core.route import products_route
 from core.auth import has_access
 
-# app.include_router(products_route, prefix="/api/products", tags=["products"])
+app.include_router(products_route, prefix="/api/products", tags=["products"])
 
 
 @app.middleware("http")
