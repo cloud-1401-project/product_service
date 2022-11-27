@@ -12,7 +12,7 @@ from core.auth import has_access
 
 
 @app.middleware("http")
-async def add_process_time_header(request: Request, call_next, authorization: Union[str, None] = Header(default=None)):
+async def add_process_time_header(request: Request, call_next):
     token = request.headers.get('authorization')
     if token is None or has_access(request.method, request.url.path, token) == False:
         return JSONResponse(status_code=401,
