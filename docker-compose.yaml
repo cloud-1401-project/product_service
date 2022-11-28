@@ -1,18 +1,29 @@
 version: "3.8"
 
 services:
-  app:
-    build: .
+  product_service:
+    build:
+      context: .
+      dockerfile: "Dockerfile.api"
     env_file:
       - .env
     ports:
       - "8000:8000"
 
 
-  database:
+  product_service_database:
     image: postgres:12
     env_file:
       - .env
+    volumes:
+      - postgres_data:/data/db
     ports:
       - "5432:5432"
 
+networks:
+  cloud_dev_internal_net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+      driver: local
