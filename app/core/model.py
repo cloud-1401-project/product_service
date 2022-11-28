@@ -8,5 +8,5 @@ products = sqlalchemy.Table(
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("title", sqlalchemy.String(100), unique=True),
-    sqlalchemy.Column("count", sqlalchemy.Integer),
+    sqlalchemy.Column("count_in_storage", sqlalchemy.Integer),
 )

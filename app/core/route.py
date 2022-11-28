@@ -27,5 +27,5 @@ async def all_products():
 @products_route.post("/create_random_products", status_code=200)
 async def create_random_products():
     for _ in range(5):
-        query = products.insert().values(title=gen_rand_str(), count=random.randint(0, 100))
+        query = products.insert().values(title=gen_rand_str(), count_in_storage=random.randint(0, 100))
         await database.execute(query=query)
