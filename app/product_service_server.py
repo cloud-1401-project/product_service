@@ -23,11 +23,10 @@ class ProductServiceServer(product_pb2_grpc.ProductServiceServicer):
 def serve():
     metadata.create_all(engine)
     config.sync_start_up()
-    print("here")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     product_pb2_grpc.add_ProductServiceServicer_to_server(
       ProductServiceServer(), server)
-    server.add_insecure_port('localhost:50051')
+    server.add_insecure_port('0.0.0.0:50052')
     server.start()
     server.wait_for_termination()
     config.sync_shut_down()
