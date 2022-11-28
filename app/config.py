@@ -4,6 +4,7 @@ import sqlalchemy
 import grpc
 import auth_pb2_grpc
 import auth_pb2
+import asyncio
 
 ''' GRPC CONFIGURATION '''
 GRPC_URL = "localhost:50051"
@@ -27,6 +28,14 @@ engine = sqlalchemy.create_engine(
 
 
 ''' APP EVENT SETTING'''
+
+
+def sync_start_up():
+    asyncio.run(database.connect())
+
+
+def sync_shut_down():
+    asyncio.run(database.disconnect())
 
 
 @app.on_event("startup")
