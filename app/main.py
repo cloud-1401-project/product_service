@@ -12,9 +12,12 @@ app.include_router(products_route, prefix="/api/products", tags=["products"])
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
+    if hasattr(request, 'is_authenticated') and request.is_authenticated:
+        response = await call_next(request)
+        return response
     token = request.headers.get('authorization')
     print(f'token is {token}')
-    if token is None or has_access(request.method, request.url.path, token) == False:
+    if token is None or has_access(request.method, request.url.path, token, request) == False:
         return JSONResponse(status_code=401,
                             content={"message": "You don't have access to this resource."})
     response = await call_next(request)
