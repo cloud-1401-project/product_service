@@ -4,7 +4,7 @@ import product_pb2_grpc
 
 
 def get_product(stub):
-    p = stub.GetProduct(product_pb2.PID(id=1))
+    p = stub.GetProduct(product_pb2.PID(id=2000))
     print(f'p is {p}')
 
 
