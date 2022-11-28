@@ -22,8 +22,6 @@ async def add_process_time_header(request: Request, call_next):
     if token is None or has_access(request.method, request.url.path, token, request) == False:
         return JSONResponse(status_code=401,
                             content={"message": "You don't have access to this resource."})
-    if request.url.path[-1] != '/':
-        request.url.path += '/'
     response = await call_next(request)
     return response
 
