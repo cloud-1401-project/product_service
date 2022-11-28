@@ -10,7 +10,7 @@ from core.auth import has_access
 app.include_router(products_route, prefix="/api/products", tags=["products"])
 
 
-@app.middleware("http")
+@app.middleware("/api/products")
 async def add_process_time_header(request: Request, call_next):
     x = getattr(request, 'is_authenticated', 'NOPE')
     print(f'is auth {x}')
