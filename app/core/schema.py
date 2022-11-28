@@ -7,4 +7,4 @@ from pydantic import BaseModel
 class Product(BaseModel):
     id: int
     title: str
-    count: int
+    count_in_storage: int
