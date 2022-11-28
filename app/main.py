@@ -12,7 +12,7 @@ app.include_router(products_route, prefix="/api/products", tags=["products"])
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
-    print(f'is auth {request.is_authenticated}')
+    print(f'is auth {getattr(request, 'is_authenticated', 'NOPE') }')
     if hasattr(request, 'is_authenticated') and request.is_authenticated:
         response = await call_next(request)
         return response
