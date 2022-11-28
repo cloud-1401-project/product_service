@@ -9,7 +9,7 @@ import asyncio
 loop = asyncio.get_event_loop()
 
 ''' GRPC CONFIGURATION '''
-GRPC_URL = "localhost:50051"
+GRPC_URL = "auth_grpc_server:50051"
 Resource = auth_pb2.Resource
 channel = grpc.insecure_channel(GRPC_URL)
 stub = auth_pb2_grpc.AuthServiceStub(channel)
@@ -20,7 +20,7 @@ app = FastAPI(title="Product Service",
 
 
 ''' DATABASE CONNECTION '''
-DATABASE_URL = "postgresql://fastapi:123456@127.0.0.1:5432/fastapi"
+DATABASE_URL = "postgresql://fastapi:123456@product_service_database:5432/fastapi"
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 
